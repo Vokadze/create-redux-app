@@ -7,6 +7,7 @@ import {
   loadTasks,
   getTasks,
   getTasksLoadingStatus,
+  createTask,
 } from './store/task'
 
 import configureStore from './store/store'
@@ -24,6 +25,12 @@ const App = (params) => {
   useEffect(() => {
     dispatch(loadTasks())
   }, [])
+
+  const addNewTask = () => {
+    dispatch(
+      createTask({ userId: 1, title: 'Some New Task', completed: false })
+    )
+  }
 
   const changeTitle = (taskId) => {
     dispatch(titleChanged(taskId))
@@ -44,6 +51,7 @@ const App = (params) => {
   return (
     <>
       <h1>App</h1>
+      <button onClick={addNewTask}>Add New Task</button>
       <ul>
         {state.map((el) => (
           <li key={el.id}>
